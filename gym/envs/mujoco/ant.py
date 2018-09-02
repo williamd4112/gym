@@ -30,9 +30,10 @@ class AntEnv(mujoco_env.MujocoEnv, utils.EzPickle):
 
     def _get_obs(self):
         return np.concatenate([
-            self.sim.data.qpos.flat[2:],
+            self.sim.data.qpos.flat,
             self.sim.data.qvel.flat,
             np.clip(self.sim.data.cfrc_ext, -1, 1).flat,
+            self.get_body_com("torso")[0]
         ])
 
     def reset_model(self):
