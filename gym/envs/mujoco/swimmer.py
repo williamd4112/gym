@@ -21,7 +21,7 @@ class SwimmerEnv(mujoco_env.MujocoEnv, utils.EzPickle):
     def _get_obs(self):
         qpos = self.sim.data.qpos
         qvel = self.sim.data.qvel
-        return np.concatenate([qpos.flat[2:], qvel.flat])
+        return np.concatenate([qpos.flat, qvel.flat])
 
     def reset_model(self):
         self.set_state(
