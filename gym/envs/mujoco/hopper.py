@@ -23,7 +23,7 @@ class HopperEnv(mujoco_env.MujocoEnv, utils.EzPickle):
 
     def _get_obs(self):
         return np.concatenate([
-            self.sim.data.qpos.flat[1:],
+            self.sim.data.qpos.flat,
             np.clip(self.sim.data.qvel.flat, -10, 10)
         ])
 
