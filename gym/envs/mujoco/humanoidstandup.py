@@ -9,12 +9,14 @@ class HumanoidStandupEnv(mujoco_env.MujocoEnv, utils.EzPickle):
 
     def _get_obs(self):
         data = self.sim.data
-        return np.concatenate([data.qpos.flat[2:],
+        print(data.ctrl.shape, data.cfrc_ext.shape)
+        return np.concatenate([data.qpos.flat,
                                data.qvel.flat,
                                data.cinert.flat,
                                data.cvel.flat,
                                data.qfrc_actuator.flat,
-                               data.cfrc_ext.flat])
+                               data.cfrc_ext.flat,
+                               data.ctrl.flat])
 
     def step(self, a):
         self.do_simulation(a, self.frame_skip)
