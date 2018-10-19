@@ -22,10 +22,7 @@ class HopperEnv(mujoco_env.MujocoEnv, utils.EzPickle):
         return ob, reward, done, {}
 
     def _get_obs(self):
-        return np.concatenate([
-            self.sim.data.qpos.flat,
-            np.clip(self.sim.data.qvel.flat, -10, 10)
-        ])
+        return self.state_vector()
 
     def reset_model(self):
         qpos = self.init_qpos + self.np_random.uniform(low=-.005, high=.005, size=self.model.nq)
