@@ -14,12 +14,14 @@ class HumanoidEnv(mujoco_env.MujocoEnv, utils.EzPickle):
 
     def _get_obs(self):
         data = self.sim.data
-        return np.concatenate([data.qpos.flat[2:],
+        return np.concatenate([data.xipos.flat,
+                               data.qpos.flat,
                                data.qvel.flat,
                                data.cinert.flat,
                                data.cvel.flat,
                                data.qfrc_actuator.flat,
-                               data.cfrc_ext.flat])
+                               data.cfrc_ext.flat,
+                               data.ctrl.flat])
 
     def step(self, a):
         pos_before = mass_center(self.model, self.sim)
