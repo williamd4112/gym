@@ -9,7 +9,6 @@ class HumanoidStandupEnv(mujoco_env.MujocoEnv, utils.EzPickle):
 
     def _get_obs(self):
         data = self.sim.data
-        print(data.ctrl.shape, data.cfrc_ext.shape)
         return np.concatenate([data.qpos.flat,
                                data.qvel.flat,
                                data.cinert.flat,
