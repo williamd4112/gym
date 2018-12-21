@@ -2,7 +2,7 @@ import numpy as np
 from gym import utils
 from gym.envs.mujoco import mujoco_env
 
-class HalfCheetahEnv(mujoco_env.MujocoEnv, utils.EzPickle):
+class SparseHalfCheetahEnv(mujoco_env.MujocoEnv, utils.EzPickle):
     def __init__(self):
         mujoco_env.MujocoEnv.__init__(self, 'half_cheetah.xml', 5)
         utils.EzPickle.__init__(self)
@@ -14,8 +14,12 @@ class HalfCheetahEnv(mujoco_env.MujocoEnv, utils.EzPickle):
         ob = self._get_obs()
         reward_ctrl = - 0.1 * np.square(action).sum()
         reward_run = (xposafter - xposbefore)/self.dt
-        #reward = reward_ctrl + reward_run
-        reward = reward_run
+        
+        if xposafter >= 5.0:
+            reward = reward_ctrl + reward_run
+        else:
+            reward = 0
+        
         done = False
         return ob, reward, done, dict(reward_run=reward_run, reward_ctrl=reward_ctrl)
 

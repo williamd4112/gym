@@ -1,7 +1,6 @@
 from gym import utils
 from gym.envs.robotics import fetch_env
 
-
 class FetchReachEnv(fetch_env.FetchEnv, utils.EzPickle):
     def __init__(self, reward_type='sparse'):
         initial_qpos = {
