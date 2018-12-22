@@ -27,8 +27,8 @@ class AntEnv(mujoco_env.MujocoEnv, utils.EzPickle):
         notdone = np.isfinite(state).all() \
             and state[2] >= 0.3 and state[2] <= 1.0 # NOTE: old 0.2
         
-        #done = not notdone
-        done = False
+        done = not notdone
+        #done = False
         
         ob = self._get_obs()
 
