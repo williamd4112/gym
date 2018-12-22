@@ -41,7 +41,6 @@ class AntEnv(mujoco_env.MujocoEnv, utils.EzPickle):
             self.sim.data.qpos.flat,
             self.sim.data.qvel.flat, 
             self.get_body_com("torso")[0].flat,
-            #self.sim.data.cfrc_ext.flat
         ])
 
     def reset_model(self):
