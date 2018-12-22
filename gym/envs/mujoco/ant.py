@@ -13,24 +13,20 @@ class AntEnv(mujoco_env.MujocoEnv, utils.EzPickle):
         self.do_simulation(a, self.frame_skip)
         xposafter = self.get_body_com("torso")[0]
         
-        forward_reward = (xposafter - xposbefore) / self.dt
-       
-        ctrl_cost = 1e-3 * .5 * np.square(a).sum()
-
-        #contact_cost = 0.5 * 1e-3 * np.sum(
-        #    np.square(np.clip(self.sim.data.cfrc_ext, -1, 1)))
-        contact_cost = 0
-
-        survive_reward = 1e-3  # NOTE: Should be zero, otherwise cheating
-
-        reward = forward_reward - ctrl_cost - contact_cost + survive_reward
+        forward_reward = (xposafter - xposbefore) / self.dt       
+        ctrl_cost = .5 * np.square(a).sum()
+        contact_cost = 0.5 * 1e-3 * np.sum(
+            np.square(np.clip(self.sim.data.cfrc_ext, -1, 1)))
+        survive_reward = 1.0  
+        #reward = forward_reward - ctrl_cost - contact_cost + survive_reward
+        reward = forward_reward
 
         state = self.state_vector()
         notdone = np.isfinite(state).all() \
             and state[2] >= 0.2 and state[2] <= 1.0 # NOTE: old 0.2
         
-        done = not notdone
-        #done = False
+        #done = not notdone
+        done = False
         
         ob = self._get_obs()
 
