@@ -12,7 +12,7 @@ class HalfCheetahEnv(mujoco_env.MujocoEnv, utils.EzPickle):
         self.do_simulation(action, self.frame_skip)
         xposafter = self.sim.data.qpos[0]
         ob = self._get_obs()
-        reward_ctrl = 1e-3 * -0.1 * np.square(action).sum()
+        reward_ctrl = 1e-4 * -0.1 * np.square(action).sum()
         reward_run = (xposafter - xposbefore)/self.dt
         reward = reward_ctrl + reward_run
         done = False
