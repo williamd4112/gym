@@ -14,7 +14,7 @@ class SwimmerEnv(mujoco_env.MujocoEnv, utils.EzPickle):
         xposafter = self.sim.data.qpos[0]
         reward_fwd = (xposafter - xposbefore) / self.dt
         reward_ctrl = - ctrl_cost_coeff * np.square(a).sum()
-        reward = reward_fwd + reward_ctrl
+        reward = reward_fwd + 0.1 * reward_ctrl
         ob = self._get_obs()
         return ob, reward, False, dict(reward_fwd=reward_fwd, reward_ctrl=reward_ctrl)
 
