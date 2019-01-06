@@ -16,3 +16,4 @@ from gym.envs.mujoco.thrower import ThrowerEnv
 from gym.envs.mujoco.striker import StrikerEnv
 
 from gym.envs.mujoco.sparse_half_cheetah import SparseHalfCheetahEnv
+from gym.envs.mujoco.cartpole import CartpoleEnv
