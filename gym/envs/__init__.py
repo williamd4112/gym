@@ -204,6 +204,13 @@ register(
 # 2D
 
 register(
+    id='MjCartPole-v2',
+    entry_point='gym.envs.mujoco:CartpoleEnv',
+    max_episode_steps=200,
+    reward_threshold=-3.75,
+)
+
+register(
     id='Reacher-v2',
     entry_point='gym.envs.mujoco:ReacherEnv',
     max_episode_steps=50,
